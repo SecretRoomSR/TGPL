@@ -9,7 +9,7 @@ Your projects are also sharable with other people, and collaboration (future pla
 ## Modding (future plan)
 Want a new code block to satisfy your desires? Then this feature is just for you, although you need to know on how to code using python. With this feature, you are able to make a mod in its in-app mod editor.
 
-If you already know python, but dont know on how to code the mod, then you might need to visit the [modding documentation](https://github.com/SecretRoomSR/GLOX/DOCS/MODDING.MD)
+If you already know python, but dont know on how to code the mod, then you might need to visit the [modding documentation](https://github.com/SecretRoomSR/GLOX/blob/main/DOCS/MODDING.md)
 
 ## Future Plan
 - Modding
