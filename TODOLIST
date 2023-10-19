@@ -1,0 +1,38 @@
+Side Notes:
+	Do "sr-push" to push TGPL to github, only works with termux
+
+
+v2023.1.0 Dev Build 1a
+
+Completed:
+	GLOX Base
+	Basic Building Tools
+	Options
+	Start Block
+	End Block
+	Notify Block
+	Signal Line Block
+	Loop Block
+
+On Work:
+	Android Keyboard Bug Fix
+	App Wrapper
+	Set Variable Block
+	Biodata IGS
+
+Going to Work On:
+	Abacus Block
+	Delay Block
+	Signal Line Optimization
+	Block Picker Menu
+	Saving System
+	If Elseif Else Block
+	Signal Line Branch Block
+	Key Listener Block
+	Button Block
+	Block Update Revamp
+	Start Anim
+
+Planned:
+	GLOX Save to GLOX Code
+	GLOX Code to Python / C++ / C

@@ -1,4 +1,4 @@
-# The GLOX Programming Language
+# GLOX
 ## GLOX is currently in its early development, so dont expect much for now :)
 GLOX is a free open-source designed to help beginners code in a blocky style.
 

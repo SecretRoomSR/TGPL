@@ -5,8 +5,7 @@ for x in "Please save every open file first.":
 	print(x, end="")
 	sys.stdout.flush()
 	sleep(0.025)
-os.system("clear")
-input("Please save every open file first.")
+input()
 print()
 
 for x in "Exporting GLOX...":
@@ -16,7 +15,7 @@ for x in "Exporting GLOX...":
 print()
 
 try:
-	shutil.rmtree("/storage/emulated/0/GLOX")
+	shutil.rmtree("/storage/emulated/0/TGPL")
 except:
 	for x in "Old GLOX directory not found, creating new folder...":
 		print(x, end="")
@@ -25,6 +24,7 @@ except:
 	print()
 
 os.system("cp -r ~/GLOX /storage/emulated/0")
+os.system("mv /storage/emulated/0/GLOX /storage/emulated/0/TGPL")
 
 print()
 

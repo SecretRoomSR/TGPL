@@ -21,12 +21,17 @@ def read_sheet():
 
 sheet = read_sheet()
 
+font = pygame.image.load("assets/font/font.png") 
+
 def render(text, color, size):
 	minoff = 0
-	font = pygame.image.load("assets/font/font.png")
-	sur = pygame.Surface((5 * len(text) + len(text) - 1, 5), pygame.SRCALPHA)
+	try:
+		sur = pygame.Surface((5 * len(text) + len(text) - 1, 5), pygame.SRCALPHA)
+	except:
+		sur = pygame.Surface((0, 0))
 	color = pygame.Color(color)
 	for v, i in enumerate(text):
+		mustRed = False
 		for x in range(5):
 			for y in range(5):
 				if i != " ":
@@ -34,11 +39,14 @@ def render(text, color, size):
 						pos = sheet[i]
 					else:
 						pos = sheet["×"]
+						mustRed = True
 					if i in ["i", " "]:
 						minoff = 2
 					get = font.get_at((x + pos[0], y + pos[1]))
-					if get[3] > 0:
+					if get[3] > 0 and get[0] == 255:
 						get = color
+						if mustRed:
+							get = pygame.Color("red") 
 					sur.set_at((x + v * 5 + v - minoff, y), get)
 	sur = pygame.transform.scale(sur, (size * len(text), size))
 	return sur

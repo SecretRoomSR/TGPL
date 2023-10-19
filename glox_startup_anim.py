@@ -1,92 +1,58 @@
 import pygame
+import font
 from loadImage import loadImage
 
 pygame.init()
 
-window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF)
+window = pygame.display.set_mode((0, 0), pygame.FULLSCREEN | pygame.HWSURFACE | pygame.DOUBLEBUF | pygame.SRCALPHA)
 
 width, height = window.get_size()
+wc, hc = width // 2, height // 2
 
 size = 0
 if width > height:
-	size = height // 2
+	size = height // 5
 else:
-	size = width // 2
+	size = width // 5
 
-icon = loadImage("iconEmpty.png", size)
-iconDone = loadImage("icon.png", size)
+gap = size // 5
+totalW = gap * 3 + size * 4
+gapLeft = (width - totalW) // 2
 
-iconPos = (width // 2 - size // 2, height // 2 - size // 2)
-mid = pygame.Surface((size // 8 * 3, size // 16), pygame.SRCALPHA)
-mid.fill("white")
-midSize = 0
-midRot = -90
-leftSize = 0
-bottom = pygame.Surface((size // 8, size // 8 * 6), pygame.SRCALPHA)
-bottom.fill("white")
-bottomRot = 0
-bottomY = 0
-rightBigSize = 0
-rightSize = 0
-topSize = 0
+g = loadImage("icon.png", size)
+l = font.render("L", "white", size)
+o = loadImage("pause.png", size)
+x = loadImage("cross.png", size + (size // 8))
 
-done = False
+g.set_alpha(0)
+l.set_alpha(0)
+o.set_alpha(0)
+x.set_alpha(0)
+
+speed = 12
+tick = 0
 
 clock = pygame.time.Clock()
 running = True
 while running:
-	window.fill("black")
-	
-	window.blit(icon, iconPos)
-	
-	if not done:
-		if midSize >= size // 8 * 3:
-			if midRot != 0:
-				midRot += 5
-		else:
-			midSize += size // 64
-		if leftSize >= size // 8 * 6:
-			leftSize = size // 8 * 6
-			window.blit(pygame.transform.rotate(bottom, bottomRot), (iconPos[0] + size // 8, iconPos[1] + size // 8 + bottomY))
-			if bottomRot != -90:
-				bottomRot -= 5
-				bottomY += size / 8 * 6 / 22
-			else:
-				bottomY = size / 8 * 5
-				if rightBigSize < size // 8 * 3:
-					rightBigSize += size // 48
-				else:
-					rightBigSize = size // 8 * 3
-					done = True
-				if rightSize < size // 8 * 2.5:
-					rightSize += size // 48
-				else:
-					rightSize = size // 8 * 2.5
-			if topSize < size // 8 * 6:
-				topSize += size / 32
-		else:
-			leftSize += size // 32
-	
 	clock.tick(60)
 	
-	if not done:
-		# Right
-		pygame.draw.rect(window, "white", pygame.Rect(iconPos[0] + size // 8 * 6, iconPos[1] + size // 8 * 3.5 - rightSize, size // 8, rightSize))
-		pygame.draw.rect(window, "white", pygame.Rect(iconPos[0] + size // 8 * 6, iconPos[1] + size // 8 * 4, size // 8, rightBigSize))
+	window.fill((0, 0, 0, 0))
 	
-		# Left
-		pygame.draw.rect(window, "white", pygame.Rect(iconPos[0] + size // 8, iconPos[1] + size // 8, size // 8, leftSize))
+	g.set_alpha(g.get_alpha() + speed)
+	l.set_alpha(l.get_alpha() + speed) 
+	o.set_alpha(o.get_alpha() + speed)
+	x.set_alpha(x.get_alpha() + speed)
 	
-		# Top And Bottom
-		pygame.draw.rect(window, "white", pygame.Rect(iconPos[0] + size // 8, iconPos[1] + size // 8, topSize, size // 8))
+	window.blit(g, (gapLeft, hc - size // 2))
+	window.blit(l, (gapLeft + gap + size, hc - size // 2))
+	window.blit(o, (gapLeft + gap * 2 + size * 2, hc - size // 2))
+	window.blit(x, (gapLeft + gap * 3 + size * 3 - (size // 8), hc - size // 2 - (size // 16)))
 	
-		# Middle
-		if midSize >= size // 8 * 3:
-			window.blit(pygame.transform.rotate(mid, midRot), (iconPos[0] + size // 2, iconPos[1] + size // 8 * 4))
-		else:
-			pygame.draw.rect(window, "white", pygame.Rect(iconPos[0] + size // 2, iconPos[1] + size // 8 * 4, size // 16, midSize))
-	else:
-		window.blit(iconDone, iconPos)
+	if g.get_alpha() > 254 and tick >= 120:
+		running = False
+	if g.get_alpha() > 254:
+		tick += 1
 	
 	pygame.display.flip()
 	

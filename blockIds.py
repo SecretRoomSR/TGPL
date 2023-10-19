@@ -46,10 +46,10 @@ def end(block, id, blocks, datas):
 		if data.collideBlock(block):
 			values.setStart(not values.start)
 
-def notifyBlock(block, id, blocks, datas):
+def message(block, id, blocks, datas):
 	for data in datas:
 		if data.collideBlock(block):
-			notify("hi")
+			notify(block.options["Text"])
 			data.x += numpy.sin(numpy.radians(block.dir + 90)) * tileSize
 			data.y += numpy.cos(numpy.radians(block.dir + 90)) * tileSize
 
@@ -93,7 +93,7 @@ blockIds = {
 0: UniqueID("Start", "start.png", start, UpdateEveryFrame=False, RunOnStart=True),
 1: UniqueID("Signal Line", "signalLine.png", signalLine, True),
 2: UniqueID("End", "end.png", end, True),
-3: UniqueID("Notify", "string.png", notifyBlock, True, True, {"Text": "Text here"}),
+3: UniqueID("Message", "string.png", message, True, True, {"Text": ""}),
 4: UniqueID("Set Variable", "setVariable.png", None, True, True, {"Var Name": "", "Var Value": custom()}),
 5: UniqueID("Loop", "loop.png", loop, True, True, {"Delay": 0})
 }
